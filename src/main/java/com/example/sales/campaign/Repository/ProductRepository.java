@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query(value = "select * from product where p_id = ?1",nativeQuery = true)
-    Product findById(int pId);
 }
