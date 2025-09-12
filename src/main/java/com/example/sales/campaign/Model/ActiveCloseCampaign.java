@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "active_campaign")
-public class ActiveCampaign {
+public class ActiveCloseCampaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class ActiveCampaign {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    public ActiveCampaign() {}
+    public ActiveCloseCampaign() {}
 
-    public ActiveCampaign(int pId, int cId, Double discount, Double price, LocalDate startDate, LocalDate endDate) {
+    public ActiveCloseCampaign(int pId, int cId, Double discount, double price, LocalDate startDate, LocalDate endDate) {
         this.pId = pId;
         this.cId = cId;
         this.discount = discount;

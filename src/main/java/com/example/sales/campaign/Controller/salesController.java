@@ -1,9 +1,12 @@
 package com.example.sales.campaign.Controller;
 
 import com.example.sales.campaign.DTO.RequestDTO.ProdCamp;
+import com.example.sales.campaign.Model.ActiveCloseCampaign;
 import com.example.sales.campaign.Model.Campaign;
 import com.example.sales.campaign.Model.Product;
 import com.example.sales.campaign.Model.ProductCampaign;
+import com.example.sales.campaign.ScheduledTask.ActiveCampaign;
+import com.example.sales.campaign.ScheduledTask.CloseCampaign;
 import com.example.sales.campaign.Service.Salesservice;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,13 @@ public class salesController {
 
     @Autowired
     Salesservice salesservice;
+
+    @Autowired
+    ActiveCampaign activeCampaign;
+
+    @Autowired
+    CloseCampaign closeCampaign;
+
 
     @PostMapping("/save-product")
     public ResponseEntity<?> saveProducts(@RequestBody List<Product> products) {
@@ -67,7 +77,7 @@ public class salesController {
     @GetMapping("/save-product_campaign3")
     public ResponseEntity<?> saveProCam3() {
         try {
-            List<ProductCampaign> campaigns = salesservice.ActivateCampaign();
+            List<ActiveCloseCampaign> campaigns = closeCampaign.InactiveCampaign();
             return ResponseEntity.ok(campaigns);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
