@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public interface ActiveCloseCampaignRepository extends JpaRepository<ActiveCloseCampaign, Integer> {
 
-    @Query(value = "SELECT * FROM active_campaign WHERE CURDATE() > end_date", nativeQuery = true)
+    @Query(value = "SELECT * FROM active_campaign WHERE date(now()) > end_date", nativeQuery = true)
     List<ActiveCloseCampaign> getExpiredCampaign();
 
     @Modifying

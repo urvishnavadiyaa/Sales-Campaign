@@ -5,6 +5,7 @@ import com.example.sales.campaign.Model.Product;
 import com.example.sales.campaign.Model.ProductCampaign;
 import com.example.sales.campaign.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,16 +28,19 @@ public class CloseCampaign {
     @Autowired
     ActiveCloseCampaignRepository activeCloseCampaignRepository;
 
-    public List<ActiveCloseCampaign> InactiveCampaign() {
+    @Scheduled(cron = "0 18 15 * * *")
+    public void InactiveCampaign() {
+        System.out.println("started");
         List<ActiveCloseCampaign> campaigns = activeCloseCampaignRepository.getExpiredCampaign();
 
-        for (ActiveCloseCampaign ac : campaigns) {
-            Product product = productRepository.findById(ac.getPId());
-            double price = ac.getPrice() / (1 - ac.getDiscount() / 100);
-            product.setCurrentPrice(price);
-            productRepository.save(product);
+        if (!campaigns.isEmpty()) {
+            for (ActiveCloseCampaign ac : campaigns) {
+                Product product = productRepository.findByPId(ac.getPId());
+                double price = ac.getPrice() / (1 - ac.getDiscount() / 100);
+                product.setCurrentPrice(price);
+                productRepository.save(product);
+            }
+            activeCloseCampaignRepository.deleteExpiredCampaigns();
         }
-        activeCloseCampaignRepository.deleteExpiredCampaigns();
-        return campaigns;
     }
 }

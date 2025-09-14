@@ -74,43 +74,4 @@ public class Salesservice {
         return prodCampRepository.save(pc);
     }
 
-//    @Scheduled(cron = "0 45 16 * * *")
-//    public List<ProductCampaign> ActivateCampaign() {
-//        List<Campaign> campaigns = campaignRepository.getActiveCampaign();
-//
-//        List<ProductCampaign> productslist = new ArrayList<>();
-//
-//        for (Campaign c : campaigns) {
-//            List<ProductCampaign> products = prodCampRepository.findProductListByCampaign(c.getCampaignId());
-//            productslist.addAll(products);
-//        }
-//
-//        for (ProductCampaign pc : productslist) {
-//            CampaignHistory ch = new CampaignHistory();
-//            ch.setPid(pc.getProduct().getpId());
-//            ch.setCid(pc.getCampaign().getCampaignId());
-//            ch.setDiscount(pc.getDiscount());
-//            ch.setOldPrice(pc.getProduct().getCurrentPrice());
-//            campaignHistoryRepository.save(ch);
-//
-//            Product p = pc.getProduct();
-//            double price = (p.getCurrentPrice() * pc.getDiscount()) / 100;
-//            double finalPrice = p.getCurrentPrice() - price;
-//            p.setCurrentPrice(finalPrice);
-//            salesRepository.save(p);
-//
-//            ActiveCampaign ac = new ActiveCampaign();
-//            ac.setPId(pc.getProduct().getpId());
-//            ac.setCId(pc.getCampaign().getCampaignId());
-//            ac.setDiscount(pc.getDiscount());
-//            ac.setStartDate(pc.getCampaign().getStartDate());
-//            ac.setEndDate(pc.getCampaign().getEndDate());
-//            ac.setPrice(finalPrice);
-//            activeCampaignRepository.save(ac);
-//        }
-//        return productslist;
-//    }
-
-    
-
 }

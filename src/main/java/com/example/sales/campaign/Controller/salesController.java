@@ -74,15 +74,15 @@ public class salesController {
         }
     }
 
-    @GetMapping("/save-product_campaign3")
-    public ResponseEntity<?> saveProCam3() {
-        try {
-            List<ActiveCloseCampaign> campaigns = closeCampaign.InactiveCampaign();
-            return ResponseEntity.ok(campaigns);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error saving data: " + e.getMessage());
-        }
-    }
+//    @GetMapping("/save-product_campaign3")
+//    public ResponseEntity<?> saveProCam3() {
+//        try {
+//            List<ActiveCloseCampaign> campaigns = closeCampaign.InactiveCampaign();
+//            return ResponseEntity.ok(campaigns);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Error saving data: " + e.getMessage());
+//        }
+//    }
 
 }
