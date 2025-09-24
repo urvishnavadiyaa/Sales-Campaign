@@ -1,8 +1,15 @@
 package com.example.sales.campaign.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "active_campaign")
 public class ActiveCloseCampaign {
@@ -29,67 +36,5 @@ public class ActiveCloseCampaign {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    public ActiveCloseCampaign() {}
-
-    public ActiveCloseCampaign(int pId, int cId, Double discount, double price, LocalDate startDate, LocalDate endDate) {
-        this.pId = pId;
-        this.cId = cId;
-        this.discount = discount;
-        this.price = price;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getPId() {
-        return pId;
-    }
-
-    public void setPId(int pId) {
-        this.pId = pId;
-    }
-
-    public int getCId() {
-        return cId;
-    }
-
-    public void setCId(int cId) {
-        this.cId = cId;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
 }
 

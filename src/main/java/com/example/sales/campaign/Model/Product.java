@@ -4,9 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -36,65 +42,4 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductCampaign> productCampaigns;
-
-    public int getpId() {
-        return pId;
-    }
-
-    public void setpId(int pId) {
-        this.pId = pId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getMRP() {
-        return MRP;
-    }
-
-    public void setMRP(double MRP) {
-        this.MRP = MRP;
-    }
-
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public int getInventoryCount() {
-        return inventoryCount;
-    }
-
-    public void setInventoryCount(int inventoryCount) {
-        this.inventoryCount = inventoryCount;
-    }
-
-    public Product(int pId, String productName, double MRP, double currentPrice, Double discount, int inventoryCount, List<ProductCampaign> productCampaigns) {
-        this.pId = pId;
-        this.productName = productName;
-        this.MRP = MRP;
-        this.currentPrice = currentPrice;
-        this.discount = discount;
-        this.inventoryCount = inventoryCount;
-        this.productCampaigns = productCampaigns;
-    }
-
-    public Product() {
-    }
 }

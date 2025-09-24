@@ -21,4 +21,9 @@ public interface ActiveCloseCampaignRepository extends JpaRepository<ActiveClose
     @Query(value = "DELETE FROM active_campaign WHERE CURDATE() > end_date", nativeQuery = true)
     void deleteExpiredCampaigns();
 
+    @Query(value = "select * from active_campaign where p_id = ?1", nativeQuery = true)
+    List<ActiveCloseCampaign> getProducts(int pId);
+
+    @Query(value = "select sum(discount) from active_campaign where p_id = ?1 group by p_id", nativeQuery = true)
+    int discount(int pId);
 }

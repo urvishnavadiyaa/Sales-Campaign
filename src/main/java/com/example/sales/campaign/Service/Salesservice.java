@@ -2,13 +2,17 @@ package com.example.sales.campaign.Service;
 
 
 import com.example.sales.campaign.DTO.RequestDTO.ProdCamp;
+import com.example.sales.campaign.DTO.ResponseDTO.ProductDTO;
 import com.example.sales.campaign.Model.*;
 import com.example.sales.campaign.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class Salesservice {
@@ -57,7 +61,6 @@ public class Salesservice {
         return savedList;
     }
 
-
     public ProductCampaign addProdCamp2(ProdCamp prodCampDTO) {
 
         Product product = productRepository.findById(prodCampDTO.getP_Id())
@@ -74,4 +77,32 @@ public class Salesservice {
         return prodCampRepository.save(pc);
     }
 
+    public Page<Product> getProductsPage(int page, int pageSize) {
+        return productRepository.findAll(PageRequest.of(page - 1, pageSize));
+    }
+
+    public List<ProductDTO> convertToDTO(List<Product> products) {
+        List<ProductDTO> dtoList = new ArrayList<>();
+        for (Product p : products) {
+            List<ActiveCloseCampaign> product = activeCloseCampaignRepository.getProducts(p.getPId());
+            ProductDTO dto = new ProductDTO(
+                    p.getPId(),
+                    p.getProductName(),
+                    p.getMRP(),
+                    p.getCurrentPrice(),
+                    p.getDiscount(),
+                    p.getInventoryCount()
+            );
+            if (product != null && !product.isEmpty()) {
+                int totalDiscount = activeCloseCampaignRepository.discount(p.getPId());
+                dto.setCampaignDiscount((double) totalDiscount);
+                dto.setTotalDiscount(totalDiscount + p.getDiscount());
+            } else {
+                dto.setCampaignDiscount(0.0);
+                dto.setTotalDiscount(p.getDiscount());
+            }
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
 }

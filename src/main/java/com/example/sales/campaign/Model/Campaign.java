@@ -1,10 +1,16 @@
 package com.example.sales.campaign.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "campaign")
 public class Campaign {
@@ -26,46 +32,4 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<ProductCampaign> productCampaigns;
 
-    public int getCampaignId() {
-        return campaignId;
-    }
-
-    public void setCampaignId(int campaignId) {
-        this.campaignId = campaignId;
-    }
-
-    public String getCampaignName() {
-        return campaignName;
-    }
-
-    public void setCampaignName(String campaignName) {
-        this.campaignName = campaignName;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public Campaign(int campaignId, String campaignName, LocalDate startDate, LocalDate endDate, List<ProductCampaign> productCampaigns) {
-        this.campaignId = campaignId;
-        this.campaignName = campaignName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.productCampaigns = productCampaigns;
-    }
-
-    public Campaign() {
-    }
 }

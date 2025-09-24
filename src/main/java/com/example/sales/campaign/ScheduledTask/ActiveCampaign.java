@@ -43,7 +43,7 @@ public class ActiveCampaign {
 
             for (ProductCampaign pc : productslist) {
                 CampaignHistory ch = new CampaignHistory();
-                ch.setPid(pc.getProduct().getpId());
+                ch.setPid(pc.getProduct().getPId());
                 ch.setCid(pc.getCampaign().getCampaignId());
                 ch.setDiscount(pc.getDiscount());
                 ch.setOldPrice(pc.getProduct().getCurrentPrice());
@@ -56,7 +56,7 @@ public class ActiveCampaign {
                 productRepository.save(p);
 
                 ActiveCloseCampaign ac = new ActiveCloseCampaign();
-                ac.setPId(pc.getProduct().getpId());
+                ac.setPId(pc.getProduct().getPId());
                 ac.setCId(pc.getCampaign().getCampaignId());
                 ac.setDiscount(pc.getDiscount());
                 ac.setStartDate(pc.getCampaign().getStartDate());

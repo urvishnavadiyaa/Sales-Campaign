@@ -2,9 +2,15 @@ package com.example.sales.campaign.Model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "campaign_history")
 public class CampaignHistory {
@@ -25,51 +31,4 @@ public class CampaignHistory {
     @Column(name = "old_price", nullable = false)
     private Double oldPrice;
 
-    public CampaignHistory() {}
-
-    public CampaignHistory(int pid, Double discount, Double oldPrice) {
-        this.pid = pid;
-        this.discount = discount;
-        this.oldPrice = oldPrice;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getPid() {
-        return pid;
-    }
-
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
-
-    public int getCid() {
-        return cid;
-    }
-
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public Double getOldPrice() {
-        return oldPrice;
-    }
-
-    public void setOldPrice(Double oldPrice) {
-        this.oldPrice = oldPrice;
-    }
 }

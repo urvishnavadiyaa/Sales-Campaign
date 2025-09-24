@@ -3,7 +3,13 @@ package com.example.sales.campaign.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "product_campaign")
 public class ProductCampaign {
@@ -25,39 +31,4 @@ public class ProductCampaign {
     @Min(0)
     @Max(100)
     private Double discount;
-
-    public int getPcId() {
-        return pcId;
-    }
-
-    public void setPcId(int pcId) {
-        this.pcId = pcId;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public ProductCampaign() {
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.sales.campaign.Controller;
 
 import com.example.sales.campaign.DTO.RequestDTO.ProdCamp;
+import com.example.sales.campaign.DTO.ResponseDTO.ProductDTO;
 import com.example.sales.campaign.Model.ActiveCloseCampaign;
 import com.example.sales.campaign.Model.Campaign;
 import com.example.sales.campaign.Model.Product;
@@ -10,11 +11,14 @@ import com.example.sales.campaign.ScheduledTask.CloseCampaign;
 import com.example.sales.campaign.Service.Salesservice;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/sales")
@@ -52,7 +56,7 @@ public class salesController {
         }
     }
 
-    @PostMapping("/save-product_campaign1")
+    @PostMapping("/save-product_campaign")
     public ResponseEntity<?> saveProCam(@Valid @RequestBody List<ProdCamp> prodCampDTOs) {
         try {
             List<ProductCampaign> savedList = salesservice.addProdCamp1(prodCampDTOs);
@@ -63,7 +67,7 @@ public class salesController {
         }
     }
 
-    @PostMapping("/save-product_campaign2")
+    @PostMapping("/save-product_campaigns")
     public ResponseEntity<?> saveProCam2(@RequestBody ProdCamp prodCampDTO) {
         try {
             ProductCampaign prodCampDTO1 = salesservice.addProdCamp2(prodCampDTO);
@@ -74,15 +78,20 @@ public class salesController {
         }
     }
 
-//    @GetMapping("/save-product_campaign3")
-//    public ResponseEntity<?> saveProCam3() {
-//        try {
-//            List<ActiveCloseCampaign> campaigns = closeCampaign.InactiveCampaign();
-//            return ResponseEntity.ok(campaigns);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Error saving data: " + e.getMessage());
-//        }
-//    }
+    @GetMapping("/products")
+    public Map<String, Object> getProducts(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int pageSize
+    ) {
+        Page<Product> productPage = salesservice.getProductsPage(page, pageSize);
+        List<ProductDTO> productDTOs = salesservice.convertToDTO(productPage.getContent());
 
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", productDTOs);
+        response.put("page", page);
+        response.put("pageSize", pageSize);
+        response.put("totalPages", productPage.getTotalPages());
+
+        return response;
+    }
 }
