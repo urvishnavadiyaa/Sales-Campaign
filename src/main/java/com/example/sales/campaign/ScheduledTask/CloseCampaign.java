@@ -17,15 +17,6 @@ public class CloseCampaign {
     ProductRepository productRepository;
 
     @Autowired
-    CampaignRepository campaignRepository;
-
-    @Autowired
-    ProdCampRepository prodCampRepository;
-
-    @Autowired
-    CampaignHistoryRepository campaignHistoryRepository;
-
-    @Autowired
     ActiveCloseCampaignRepository activeCloseCampaignRepository;
 
     @Scheduled(cron = "0 18 15 * * *")

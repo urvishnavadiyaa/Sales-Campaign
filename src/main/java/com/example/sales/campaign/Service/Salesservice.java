@@ -27,9 +27,6 @@ public class Salesservice {
     ProdCampRepository prodCampRepository;
 
     @Autowired
-    CampaignHistoryRepository campaignHistoryRepository;
-
-    @Autowired
     ActiveCloseCampaignRepository activeCloseCampaignRepository;
 
     public List<Product> saveAll(List<Product> products) {

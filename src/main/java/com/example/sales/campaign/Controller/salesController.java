@@ -27,13 +27,6 @@ public class salesController {
     @Autowired
     Salesservice salesservice;
 
-    @Autowired
-    ActiveCampaign activeCampaign;
-
-    @Autowired
-    CloseCampaign closeCampaign;
-
-
     @PostMapping("/save-product")
     public ResponseEntity<?> saveProducts(@RequestBody List<Product> products) {
         try {
